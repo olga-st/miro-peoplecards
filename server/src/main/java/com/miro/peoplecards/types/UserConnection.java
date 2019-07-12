@@ -1,6 +1,4 @@
-package com.miro.peoplecards;
-
-import java.util.Date;
+package com.miro.peoplecards.types;
 
 public class UserConnection {
 //	public String type;

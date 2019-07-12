@@ -13,38 +13,28 @@
             padding: 24px 0 0 24px;
         }
 
-        textarea {
-            display: block;
-            height: calc(100% - 110px);
-            margin: 20px 0 0 20px;
-            background-color: white;
-            border-radius: 4px;
-            border: 0;
-            width: calc(100% - 40px);
-            text-align: left;
-            font-size: 22px;
+        .scrollable-container {
+            height: 95%;
+            overflow-y: auto;
         }
 
-        .tip {
-            color: #CCCCCC;
+        .scrollable-content {
+            height: 2000px;
             margin: 20px 0 0 26px;
         }
+
     </style>
 </head>
 
 <body>
 <div class="rtb-sidebar-caption">Select user</div>
-<!--<div class="tip" id="tip">-->
-<!--    Select widget to see its text-->
-<!--</div>-->
-<!--<textarea id="widget-text" readonly></textarea>-->
 
-<div class="userlist" id="userlist">
-    <ul style="list-style-type:none;" id="data">
-        <li>Coffee</li>
-        <li>Tea</li>
-        <li>Milk</li>
-    </ul>
+<div class="scrollable-container">
+    <div class="scrollable-content">
+        <ul style="list-style-type:none;" id="userlist">
+
+        </ul>
+    </div>
 </div>
 
 <script src="sidebar.js"></script>

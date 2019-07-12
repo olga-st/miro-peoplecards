@@ -27,11 +27,3 @@ rtb.onReady(() => {
         }
     })
 })
-
-function zoomIn() {
-  return rtb.board.viewport.setZoom(0.5)
-}
-
-function zoomOut() {
-  return rtb.board.viewport.setZoom(4)
-}

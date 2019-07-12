@@ -1,4 +1,4 @@
-package com.miro.peoplecards;
+package com.miro.peoplecards.types;
 
 public class User {
 	public String email;
