@@ -30,9 +30,24 @@ function addUserToList(data) {
 
     var li = document.createElement("li");
     li.appendChild(document.createTextNode(name));
-    li.onclick = function() {
-        userChosen(name, email, pic);
-    }
+    li.setAttribute('draggable', true);
+//    li.onclick = function() {
+//        userChosen(name, email, pic);
+//    }
+    li.addEventListener('dragend', function(e) {
+        console.log(e);
+        var x = e.pageX;
+        var y = e.pageY;
+        userChosen(x, y, name, email, pic);
+    });
+
+    li.addEventListener('dragstart', function() {console.log("dragstart")}, false);
+            li.addEventListener('dragenter', function() {console.log("dragenter")}, false)
+            li.addEventListener('dragover', function() {console.log("dragover")}, false);
+            li.addEventListener('dragleave', function() {console.log("dragleave")}, false);
+            li.addEventListener('drop', function() {console.log("drop")}, false);
+            li.addEventListener('dragend', function() {console.log("dragend")}, false);
+
     userlist.appendChild(li);
 }
 
@@ -43,35 +58,42 @@ function clearUserList() {
     }
 }
 
-async function userChosen(name, email, picture) {
-    var x = 0;
-    var y = 0;
+async function userChosen(x, y, name, email, picture) {
+    var viewport = await rtb.board.viewport.getViewport();
+
+    var coef = viewport.height / window.innerHeight;
+
+    x = x * coef + viewport.x;
+    y = y * coef + viewport.y;
+
+    height = viewport.height * 0.2;
+    width = height * 0.5;
 
     await rtb.board.widgets.create({
         type: "SHAPE",
         x: x,
         y: y,
         style: { shapeType: 3, backgroundColor: "#fef445", backgroundOpacity: 1, borderColor: "#1a1a1a", borderWidth: 2},
-        width: 200,
-        height: 400
+        width: width,
+        height: height
     });
 
     await rtb.board.widgets.create({
         type: "IMAGE",
         url: picture,
-        x: x + 10,
-        y: y - 100,
-        width: 160,
-        height: 160
+        x: x,
+        y: y - height * 0.25,
+        width: width * 0.8,
+        height: width * 0.8
     });
 
     await rtb.board.widgets.create({
         type: "SHAPE",
         text: name,
-        x: x + 10,
-        y: x + 20,
-        width: 160,
-        height: 180,
+        x: x,
+        y: y + height * 0.25,
+        width: width * 0.8,
+        height: height * 0.5,
         style: {
             shapeType: 3,
             backgroundColor: "transparent",
@@ -83,6 +105,7 @@ async function userChosen(name, email, picture) {
             italic: 0,
             strike: 0,
             textAlign: "l",
+            textAlignVertical: "t",
             textColor: "#1a1a1a",
             underline: 0
         }
